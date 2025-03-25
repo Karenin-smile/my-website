@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>白小鸟疗愈圣地 - 身心灵平衡之道</title>
+    <style>
+        /* 基础样式 */
+        body {
+            font-family: 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f9f5f0;
+            line-height: 1.6;
+        }
+        
+        /* 容器 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 页眉 */
+        header {
+            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.7)), url('images/header.jpg') no-repeat center center;
+            background-size: cover;
+            height: 100vh;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 5px;
+            color: #5a4a3f;
+            margin-bottom: 20px;
+        }
+        
+        .slogan {
+            font-size: 1.2rem;
+            color: #7a6a5f;
+            font-style: italic;
+            margin-bottom: 40px;
+        }
+        
+        /* 导航 */
+        nav {
+            background-color: rgba(255,255,255,0.9);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        nav li {
+            margin: 0 20px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #5a4a3f;
+            font-weight: 300;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #b88a63;
+        }
+        
+        /* 主要内容 */
+        .intro {
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .intro h2 {
+            font-size: 2rem;
+            color: #5a4a3f;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        
+        .intro p {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: #7a6a5f;
+        }
+        
+        /* 服务项目 */
+        .services {
+            padding: 60px 0;
+            background-color: #fff;
+        }
+        
+        .services h2 {
+            text-align: center;
+            font-size: 2rem;
+            color: #5a4a3f;
+            margin-bottom: 50px;
+            font-weight: 300;
+        }
+        
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: #f9f5f0;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-img {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .service-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .service-card:hover .service-img img {
+            transform: scale(1.05);
+        }
+        
+        .service-content {
+            padding: 25px;
+        }
+        
+        .service-content h3 {
+            font-size: 1.5rem;
+            color: #5a4a3f;
+            margin-top: 0;
+            font-weight: 300;
+        }
+        
+        .service-content p {
+            color: #7a6a5f;
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: #5a4a3f;
+            color: #e8e0d9;
+            padding: 50px 0 20px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: 300;
+            color: #fff;
+        }
+        
+        .footer-section p, .footer-section a {
+            color: #e8e0d9;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .footer-section a:hover {
+            color: #fff;
+        }
+        
+        .copyright {
+            border-top: 1px solid #7a6a5f;
+            padding-top: 20px;
+            font-size: 0.9rem;
+        }
+        
+        /* 装饰元素 */
+        .divider {
+            width: 100px;
+            height: 2px;
+            background-color: #b88a63;
+            margin: 30px auto;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: #b88a63;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border-left: 2px solid #b88a63;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">白小鸟疗愈圣地</div>
+            <div class="slogan">融合瑜伽与中医智慧的东方疗愈空间</div>
+        </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#about">关于我们</a></li>
+            <li><a href="#services">疗愈项目</a></li>
+            <li><a href="#contact">联系我们</a></li>
+        </ul>
+    </nav>
+    
+    <section class="intro" id="about">
+        <div class="container">
+            <h2>回归内在平衡</h2>
+            <div class="divider"></div>
+            <p>白小鸟疗愈圣地是一个融合古老东方智慧与现代疗愈技术的宁静空间。
+                <p>我们结合瑜伽的身心整合与中医的能量平衡，为您提供全方位的疗愈体验。</p>
+            <p>在这里，每一处细节都经过精心设计，从颂钵的和谐振动到艾灸的温暖能量，再到拔火罐的深层调理，我们致力于帮助您恢复身心的自然平衡状态。</p>
+            <div class="quote">
+                "真正的疗愈始于对自我的觉察与接纳。"
+            </div>
+        </div>
+    </section>
+    
+    <section class="services" id="services">
+        <div class="container">
+            <h2>疗愈项目</h2>
+            <div class="divider"></div>
+            <div class="service-grid">
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="images/singing-bowl.jpg" alt="颂钵疗愈">
+                    </div>
+                    <div class="service-content">
+                        <h3>颂钵疗愈</h3>
+                        <p>源自喜马拉雅地区的古老疗愈方式，通过铜钵产生的和谐振动频率，帮助身体细胞重新排列，释放深层压力与紧张情绪，恢复内在平衡。</p>
+                        <p>结合瑜伽呼吸法，可达到更深层次的放松与冥想状态。</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="images/moxibustion.jpg" alt="艾灸疗法">
+                    </div>
+                    <div class="service-content">
+                        <h3>艾灸疗法</h3>
+                        <p>中医传统外治法，通过燃烧艾草产生的温热刺激经络穴位，温通气血、扶正祛邪。</p>
+                        <p>我们采用优质陈艾，结合瑜伽体位法帮助能量流动，针对不同体质定制个性化方案，调理亚健康状态。</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="images/cupping.jpg" alt="拔火罐">
+                    </div>
+                    <div class="service-content">
+                        <h3>拔火罐疗法</h3>
+                        <p>传统中医外治疗法，通过负压吸引作用疏通经络、活血化瘀、祛风散寒。</p>
+                        <p>我们采用现代玻璃火罐与传统竹罐相结合的方式，配合瑜伽拉伸动作，帮助释放筋膜紧张，改善局部循环，缓解肌肉酸痛与疲劳。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>联系方式</h3>
+                    <p>地址：南湖</p>
+                    <p>电话：15172509050</p>
+                    <p>邮箱：info@whitebirdhealing.com</p>
+                </div>
+                <div class="footer-section">
+                    <h3>营业时间</h3>
+                    <p>周一至周五：10:00 - 20:00</p>
+                    <p>周六至周日：9:00 - 21:00</p>
+                </div>
+                <div class="footer-section">
+                    <h3>关注我们</h3>
+                    <a href="#">微信公众号</a>
+                    <a href="#">微博</a>
+                    <a href="#">小红书</a>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 白小鸟疗愈圣地 版权所有
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
