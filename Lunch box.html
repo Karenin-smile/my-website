@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中午吃什么？</title>
+    <style>
+        body {
+            font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
+            background-color: #e2dcdb;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url('https://c-ssl.duitang.com/uploads/item/201802/24/20180224114909_YW3mr.jpeg');
+            background-size: 30%;
+            background-blend-mode: overlay;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.514);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border: 3px solid #ffed9e;
+        }
+
+        h1 {
+            color: #da1c1c;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            font-family: 'Comic Sans MS', cursive;
+        }
+
+        .wheel-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            margin: 0 auto 30px;
+        }
+
+        .wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            border: 8px solid #FFD166;
+            box-shadow: 0 0 0 8px #ffe89e, 0 0 20px rgba(0, 0, 0, 0.2);
+            transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+            transform: rotate(0deg);
+        }
+
+        .wheel-center {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-color: #FFe59E;
+            border-radius: 50%;
+            top: 51%;
+            left: 52%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            border: 5px solid #FFd09e;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .wheel-center::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #FFD166;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .wheel-pointer {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 40px solid #ffb19e;
+            z-index: 5;
+            filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.3));
+        }
+
+        .wheel-pointer::after {
+            content: '';
+            position: absolute;
+            top: -35px;
+            left: -10px;
+            width: 20px;
+            height: 20px;
+            background-color: #FFD166;
+            border-radius: 50%;
+        }
+
+        .section {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            transform-origin: 100% 100%;
+            left: 0;
+            top: 0;
+            display: flex;
+            align-items: center;
+            padding-left: 30px;
+            box-sizing: border-box;
+            color: rgb(245, 240, 240);
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            font-size: 16px;
+        }
+
+        .section:nth-child(1) { background-color: #ffe59e; transform: rotate(0deg) skewY(30deg); }
+        .section:nth-child(2) { background-color: #FFd09e; transform: rotate(30deg) skewY(30deg); }
+        .section:nth-child(3) { background-color: #FFe59E; transform: rotate(60deg) skewY(30deg); }
+        .section:nth-child(4) { background-color: #FFd09e; transform: rotate(90deg) skewY(30deg); }
+        .section:nth-child(5) { background-color: #FFe59E; transform: rotate(120deg) skewY(30deg); }
+        .section:nth-child(6) { background-color: #FFd09e; transform: rotate(150deg) skewY(30deg); }
+        .section:nth-child(7) { background-color: #FFe59E; transform: rotate(180deg) skewY(30deg); }
+        .section:nth-child(8) { background-color: #FFd09e; transform: rotate(210deg) skewY(30deg); }
+        .section:nth-child(9) { background-color: #FFe59E; transform: rotate(240deg) skewY(30deg); }
+        .section:nth-child(10) { background-color: #FFd09e; transform: rotate(270deg) skewY(30deg); }
+        .section:nth-child(11) { background-color: #FFe59E; transform: rotate(300deg) skewY(30deg); }
+        .section:nth-child(12) { background-color: #FFd09e; transform: rotate(330deg) skewY(30deg); }
+        
+
+        .section-text {
+            transform: skewY(-30deg) rotate(15deg);
+            width: 100px;
+            text-align: center;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .spin-button {
+            background-color: #ffad9e;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+            font-weight: bold;
+            font-family: 'Comic Sans MS', cursive;
+        }
+
+        .spin-button:hover {
+            background-color: #FF5252;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.6);
+        }
+
+        .spin-button:active {
+            transform: translateY(1px);
+        }
+
+        .result {
+            text-align: center;
+            font-size: 1.8em;
+            color: #a81b1b;
+            font-weight: bold;
+            margin: 20px 0;
+            min-height: 50px;
+            font-family: 'Comic Sans MS', cursive;
+        }
+
+        .edit-section {
+            background-color: #FFF;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+            border: 2px dashed #FFe59E;
+        }
+
+        .edit-section h2 {
+            color: #FFd09e;
+            margin-top: 0;
+            font-family: 'Comic Sans MS', cursive;
+        }
+
+        .options-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .option-item {
+            background-color: #FFD166;
+            padding: 8px 15px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 0.9em;
+        }
+
+        .option-item button {
+            background: none;
+            border: none;
+            color: #FFd09e;
+            cursor: pointer;
+            margin-left: 8px;
+            font-weight: bold;
+        }
+
+        .add-option {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .add-option input {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #FFe59E;
+            border-radius: 10px;
+            font-size: 1em;
+        }
+
+        .add-option button {
+            background-color: #FFe59E;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .add-option button:hover {
+            background-color: #FFd09e;
+        }
+
+        .save-button {
+            background-color: #06D6A0;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .save-button:hover {
+            background-color: #05B589;
+            transform: translateY(-2px);
+        }
+
+        .food-icon {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>中午吃什么大转盘</h1>
+        
+        <div class="wheel-container">
+            <div class="wheel-pointer"></div>
+            <div class="wheel" id="wheel">
+                <!-- 选项将通过JavaScript动态生成 -->
+            </div>
+            <div class="wheel-center"></div>
+        </div>
+        
+        <div class="button-container">
+            <button class="spin-button" id="spinButton">吃点啥</button>
+        </div>
+        
+        <div class="result" id="result"></div>
+        
+        <div class="edit-section">
+            <h2>编辑选项</h2>
+            <div class="options-list" id="optionsList">
+                <!-- 选项列表将通过JavaScript动态生成 -->
+            </div>
+            
+            <div class="add-option">
+                <input type="text" id="newOptionInput" placeholder="添加新选项">
+                <button id="addOptionButton">添加</button>
+            </div>
+            
+            <button class="save-button" id="saveButton">保存设置</button>
+        </div>
+    </div>
+
+    <script>
+        // 初始选项
+        let options = [
+            "食堂一楼", "食堂三楼", "汉堡", "赛百味", 
+            "胡辣汤", "臭粉", "水煮鱼", "吃什么吃，减肥", 
+            "粤菜", "湘菜", "乌冬面", "拉面"
+        ];
+
+        // 食物图标映射
+        const foodIcons = {
+            "食堂一楼": "🍚", "食堂三楼": "🍛", "汉堡": "🍔", "赛百味": "🥪", 
+            "胡辣汤": "🍲", "臭粉": "🍜", "水煮鱼": "🐟", "吃什么吃，减肥": "🥢", 
+            "粤菜": "🍤", "湘菜": "🌶️", "乌冬面": "🍜", "拉面": "🍜"
+        };
+
+        // 从本地存储加载选项
+        function loadOptions() {
+            const savedOptions = localStorage.getItem('lunchWheelOptions');
+            if (savedOptions) {
+                options = JSON.parse(savedOptions);
+            }
+            renderWheel();
+            renderOptionsList();
+        }
+
+        // 保存选项到本地存储
+        function saveOptions() {
+            localStorage.setItem('lunchWheelOptions', JSON.stringify(options));
+            alert('选项已保存！');
+        }
+
+        // 渲染转盘
+        function renderWheel() {
+            const wheel = document.getElementById('wheel');
+            wheel.innerHTML = '';
+            
+            const sectionAngle = 360 / options.length;
+            
+            options.forEach((option, index) => {
+                const section = document.createElement('div');
+                section.className = 'section';
+                section.style.transform = `rotate(${index * sectionAngle}deg) skewY(${90 - sectionAngle}deg)`;
+                
+                const sectionText = document.createElement('div');
+                sectionText.className = 'section-text';
+                sectionText.innerHTML = `<span style="font-size: 24px;">${foodIcons[option] || '🍴'}</span><br>${option}`;
+                
+                section.appendChild(sectionText);
+                wheel.appendChild(section);
+            });
+        }
+
+        // 渲染选项列表
+        function renderOptionsList() {
+            const optionsList = document.getElementById('optionsList');
+            optionsList.innerHTML = '';
+            
+            options.forEach((option, index) => {
+                const optionItem = document.createElement('div');
+                optionItem.className = 'option-item';
+                optionItem.innerHTML = `
+                    <span style="font-size: 20px;">${foodIcons[option] || '🍴'}</span>
+                    ${option}
+                    <button data-index="${index}">×</button>
+                `;
+                optionsList.appendChild(optionItem);
+            });
+            
+            // 添加删除事件
+            document.querySelectorAll('.option-item button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    options.splice(index, 1);
+                    renderWheel();
+                    renderOptionsList();
+                });
+            });
+        }
+
+        // 旋转转盘
+        function spinWheel() {
+            const wheel = document.getElementById('wheel');
+            const result = document.getElementById('result');
+            const spinButton = document.getElementById('spinButton');
+            
+            // 禁用按钮防止重复点击
+            spinButton.disabled = true;
+            result.textContent = '';
+            
+            // 随机旋转角度 (5-10圈 + 随机停在某个选项上)
+            const spinAngle = 1800 + Math.floor(Math.random() * 1800);
+            const sectionAngle = 360 / options.length;
+            const stopAngle = spinAngle % 360;
+            const selectedIndex = Math.floor((360 - stopAngle) / sectionAngle) % options.length;
+            
+            wheel.style.transform = `rotate(${spinAngle}deg)`;
+            
+            // 旋转结束后显示结果
+            setTimeout(() => {
+                result.textContent = `今天吃：${options[selectedIndex]} ${foodIcons[options[selectedIndex]] || '🍴'}`;
+                spinButton.disabled = false;
+            }, 4000);
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            loadOptions();
+            
+            // 绑定旋转按钮事件
+            document.getElementById('spinButton').addEventListener('click', spinWheel);
+            
+            // 绑定添加选项事件
+            document.getElementById('addOptionButton').addEventListener('click', function() {
+                const newOptionInput = document.getElementById('newOptionInput');
+                const newOption = newOptionInput.value.trim();
+                
+                if (newOption && !options.includes(newOption)) {
+                    options.push(newOption);
+                    renderWheel();
+                    renderOptionsList();
+                    newOptionInput.value = '';
+                } else if (options.includes(newOption)) {
+                    alert('这个选项已经存在啦！');
+                }
+            });
+            
+            // 按回车键也可以添加选项
+            document.getElementById('newOptionInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    document.getElementById('addOptionButton').click();
+                }
+            });
+            
+            // 绑定保存按钮事件
+            document.getElementById('saveButton').addEventListener('click', saveOptions);
+        });
+    </script>
+</body>
+</html>
